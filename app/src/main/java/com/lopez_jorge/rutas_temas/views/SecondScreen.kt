@@ -1,19 +1,21 @@
 package com.lopez_jorge.rutas_temas.views
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.runtime.saveable.rememberSaveable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,8 +55,13 @@ fun SecondScreen(navController: NavController, name: String) {
 
             Spacer(modifier = Modifier.height(40.dp))
 
-            // 🌈 Aquí va tu animación de color
+            // 🌈 Animación de color
             AnimatedColorExample()
+
+            Spacer(modifier = Modifier.height(40.dp))
+
+            // 🌫️ Animación de opacidad
+            AnimatedAlphaExample()
         }
     }
 }
@@ -83,5 +90,37 @@ fun AnimatedColorExample() {
                 .background(backgroundColor)
                 .padding(20.dp)
         )
+    }
+}
+
+@Composable
+fun AnimatedAlphaExample() {
+    var animateAlpha by rememberSaveable { mutableStateOf(true) }
+    val alpha by animateFloatAsState(
+        targetValue = if (animateAlpha) 1f else 0.3f,
+        label = "alphaAnimation"
+    )
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(onClick = { animateAlpha = !animateAlpha }) {
+            Text(text = "Cambiar Opacidad")
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Box(
+            modifier = Modifier
+                .graphicsLayer(alpha = alpha)
+                .fillMaxWidth()
+                .background(Color(0xFFFFA020))
+        ) {
+            Text(
+                text = "Hola Rick!",
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(20.dp)
+            )
+        }
     }
 }
