@@ -6,8 +6,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.lopez_jorge.rutas_temas.viewa.SecondScreen
+import com.lopez_jorge.rutas_temas.views.SecondScreen
 import com.lopez_jorge.rutas_temas.views.FirstScreen
+import com.lopez_jorge.rutas_temas.views.SplashScreen
 
 
 @Composable
@@ -18,8 +19,14 @@ fun Navigation() {
     //Elemento que conoce las diferentes pantallas y cual es la primera en lanzarse
     NavHost(
         navController = navController,
-        startDestination = Routes.FirstScreen.route
+        startDestination = Routes.SplashScreen.route
     ){
+        //Definicion de la splash screen
+        composable(
+            route = Routes.SplashScreen.route
+        ) {
+            SplashScreen(navController)
+        }
         //Definición de la primera pantalla
         composable(
             route = Routes.FirstScreen.route
