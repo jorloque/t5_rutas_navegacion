@@ -13,30 +13,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.lopez_jorge.rutas_temas.navigation.Navigation
 import com.lopez_jorge.rutas_temas.ui.theme.Rutas_temasTheme
+import com.lopez_jorge.rutas_temas.views.FirstScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            Rutas_temasTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(start = 30.dp, end = 20.dp, top=50.dp)
-                    )
-                }
-            }
+            Navigation()
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
 
